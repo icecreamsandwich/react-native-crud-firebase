@@ -1,13 +1,13 @@
 // Home.js
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 
 export default class Home extends Component {
   render() {
     return (
       <View>
-        <Text>"Home Screen"</Text>
+        <Text>Home Screen</Text>
       </View>
     )
   }

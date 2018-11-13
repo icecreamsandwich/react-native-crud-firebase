@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
-import { addItem } from '../services/ItemService';
+// import { addItem } from '../services/ItemService';
+import { db } from '../config/db';
 
 export default class AddItem extends Component {
   constructor(props) {
@@ -30,24 +31,31 @@ export default class AddItem extends Component {
       );
       console.log(this.state.name)
     }
+
+    addItem =  (item) => {
+        db.ref('/items').push({
+            name: item
+        });
+    }
+
   render() {
     return (
       <View style={styles.main}>
         <Text style={styles.title}>Add Item</Text>
         <TextInput
-              style={styles.itemInput}
-              onChange={this.handleChange}
-            />
+          style={styles.itemInput}
+          onChange={this.handleChange}
+        />
         <TouchableHighlight
-                style = {styles.button}
-                underlayColor= "white"
-                onPress = {this.handleSubmit}
-              >
-              <Text
-                  style={styles.buttonText}>
-                  Add
-              </Text>
-            </TouchableHighlight>
+          style = {styles.button}
+          underlayColor= "white"
+          onPress = {this.handleSubmit}
+        >
+          <Text
+            style={styles.buttonText}>
+            Add
+          </Text>
+        </TouchableHighlight>
       </View>
     )
   }

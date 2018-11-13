@@ -7,26 +7,15 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import {Platform, StyleSheet, Text, View, YellowBox} from 'react-native';
+import { createTabNavigator } from 'react-navigation';
 
-import Home from './src/screens/Home';
-import AddItem from './src/screens/AddItem';
-import ListItem from './src/screens/ListItem';
-import { YellowBox } from 'react-native';
+ import Home from './screens/Home';
+ import AddScreen from './screens/AddScreen';
 
-const AppNavigator = StackNavigator({
-  HomeScreen: { screen: Home },
-  AddItemScreen: { screen: AddItem },
-  ListItemScreen: { screen: ListItem }
+
+
+export default createTabNavigator({
+    Home: { screen: Home },
+    AddItem: { screen: AddScreen },
 });
-
-
-type Props = {};
-export default class App extends Component {
-  render() {
-    return (
-      <AppNavigator />
-    );
-  }
-}
