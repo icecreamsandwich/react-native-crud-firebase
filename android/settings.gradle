@@ -1,0 +1,3 @@
+rootProject.name = 'RNCrudFBase'
+
+include ':app'
