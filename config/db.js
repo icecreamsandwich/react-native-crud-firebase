@@ -2,12 +2,12 @@
 
 import Firebase from 'firebase';
  let config = {
-    apiKey: "AIzaSyBu7u1NXsPTLkjEV4NGRtxGqLt9BcgiQt0",
+    apiKey: "fillyourapikeyhere",
     authDomain: "",
     databaseURL: "https://react-native-crud-firebase.firebaseio.com/",
     projectId: "react-native-crud-firebase",
     storageBucket: "",
-    messagingSenderId: "620823788564"
+    messagingSenderId: "senderId"
   };
 let app = Firebase.initializeApp(config);
 export const db = app.database();
