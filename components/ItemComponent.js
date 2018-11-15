@@ -27,10 +27,13 @@ export default class ItemComponent extends Component {
     return (
       <View style={styles.itemsList}>
         {this.props.items.map((item, index) => {
-            return (
-                <View key={index}>
-                    <Text style={styles.itemtext}>{item.name}</Text>
-                </View>
+          return (
+            <View key={index}>
+              <Text style={styles.itemtext}>{item.firstname}</Text>
+              <Text style={styles.itemtext}>{item.lastname}</Text>
+              <Text style={styles.itemtext}>{item.classn}</Text>
+              <Text style={styles.itemtext}>{item.grade}</Text>
+            </View>
             )
         })}
       </View>
