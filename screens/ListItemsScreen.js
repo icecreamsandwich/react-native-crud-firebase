@@ -15,35 +15,29 @@ export default class ListItemsScreen extends Component {
   }
 
 
-  componentWillMount() {
-    // Initialize Firebase
-     var config = {
-       apiKey: "AIzaSyBu7u1NXsPTLkjEV4NGRtxGqLt9BcgiQt0",
-       authDomain: "react-native-crud-firebase.firebaseapp.com",
-       databaseURL: "https://react-native-crud-firebase.firebaseio.com",
-       projectId: "react-native-crud-firebase",
-       storageBucket: "react-native-crud-firebase.appspot.com",
-       messagingSenderId: "620823788564"
-     };
-    var db = firebase.initializeApp(config);
-    var dbRef = db.database().ref('/items');
-    dbRef.once('value').then(snapshot => {
-      this.setState({ items: snapshot.val() })
+  componentDidMount() {
+    firebase.database().ref('/items').once('value').then(snapshot => {
+      // let dataContainer = [];
+      // var childData = snapshot.val();
+      // dataContainer.push(childData)
+      this.setState({ items: snapshot.val() });
     })
 }
 
   render() {
+    const { items } = this.state;
     return (
-      // <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.getStartedContainer}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.itemsList}>
           {
-            this.state.items.length > 0
-              ? <ItemComponent items={this.state.items} />
+            Object.keys(items).length > 0
+              ? <ItemComponent items={items} />
               : <Text>No items</Text>
           }
 
-        </View>
-      // </ScrollView>
+              </View>
+      </ScrollView>
+
     );
   }
 }

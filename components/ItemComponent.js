@@ -1,7 +1,7 @@
 // ItemComponent.js
 
 import React, {Component} from 'react';
-import {  View, Text, StyleSheet} from 'react-native';
+import {  View, ScrollView, Text, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -24,19 +24,22 @@ export default class ItemComponent extends Component {
   };
 
   render() {
+    alert(JSON.stringify(this.props.items))
     return (
-      <View style={styles.itemsList}>
-        {this.props.items.map((item, index) => {
-          return (
-            <View key={index}>
-              <Text style={styles.itemtext}>{item.firstname}</Text>
-              <Text style={styles.itemtext}>{item.lastname}</Text>
-              <Text style={styles.itemtext}>{item.classn}</Text>
-              <Text style={styles.itemtext}>{item.grade}</Text>
-            </View>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.itemsList}>
+          {/* {this.props.items.map((item, index) => {
+            return (
+              <View key={index}>
+            <Text style={styles.itemtext}>{item.firstname}</Text>
+            <Text style={styles.itemtext}>{item.lastname}</Text>
+            <Text style={styles.itemtext}>{item.classn}</Text>
+            <Text style={styles.itemtext}>{item.grade}</Text>
+              </View>
             )
-        })}
-      </View>
+          })} */}
+        </View>
+      </ScrollView>
     );
   }
 }
