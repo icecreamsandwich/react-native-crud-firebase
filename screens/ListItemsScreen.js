@@ -10,22 +10,23 @@ export default class ListItemsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-		 items: []
+		 itemsFbase: []
     }
   }
 
 
   componentDidMount() {
     firebase.database().ref('/items').once('value').then(snapshot => {
-      // let dataContainer = [];
-      // var childData = snapshot.val();
-      // dataContainer.push(childData)
-      this.setState({ items: snapshot.val() });
+      this.setState({ itemsFbase: snapshot.val() });
     })
 }
 
   render() {
-    const { items } = this.state;
+    const { itemsFbase } = this.state;
+    var items = [];
+    Object.keys(itemsFbase).forEach(function(key) {
+      items.push(itemsFbase[key]);
+    });
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.itemsList}>

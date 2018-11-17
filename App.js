@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Sample React Native CRUD app using firebase
+ * https://github.com/icecreamsandwich/react-native-crud-firebase
  *
  * @format
  * @flow
@@ -17,120 +17,9 @@ import { View,
   YellowBox} from 'react-native';
 import { createMaterialTopTabNavigator  } from 'react-navigation';
 import firebase from 'firebase';
+import HomeScreen from './screens/HomeScreen';
+import AddItemsScreen from './screens/AddItemsScreen';
 import ListItemsScreen from './screens/ListItemsScreen';
-
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>This is Home! ok goof nextt!! ok </Text>
-      </View>
-    );
-  }
-}
-
-class AddItemsScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    var config = {
-     apiKey: "AIzaSyBu7u1NXsPTLkjEV4NGRtxGqLt9BcgiQt0",
-     authDomain: "",
-     databaseURL: "https://react-native-crud-firebase.firebaseio.com/",
-     projectId: "react-native-crud-firebase",
-     storageBucket: "",
-     messagingSenderId: ""
-    };
-    if (!firebase.apps.length){
-      this.db = firebase.initializeApp(config);
-    }
-    this.state = {
-		 firstname: '',
-     lastname: '',
-     classn: '',
-     grade: '',
-		 error: false,
-     items:[]
-    }
-  }
-
-  componentDidMount(){
-    var dbRef = this.db.database().ref('/items');
-    dbRef.once('value').then(snapshot => {
-      this.setState({ items: snapshot.val() })
-    })
-  }
-
-  handleSubmit = () => {
-     this.addItem(this.state.firstname,
-       this.state.lastname,
-       this.state.classn,
-       this.state.grade);
-       Alert.alert(
-       'Item saved successfully'
-     );
-
-  }
-
-  addItem =  (firstname,lastname,classn,grade) => {
-    let dbCon = this.db.database().ref('/items');
-     dbCon.push({
-         firstname: firstname,
-         lastname: lastname,
-         classn: classn,
-         grade: grade,
-       });
-  }
-
-  render() {
-    return (
-       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-         <View style={styles.main}>
-           <Text style={styles.title}>First Name</Text>
-           <TextInput
-             name='firstname'
-             style={styles.itemInput}
-             onChangeText={(text) => this.setState({firstname:text})}
-             value={this.state.firstname}
-           />
-           <Text style={styles.title}>Last Name</Text>
-           <TextInput
-             name='lastname'
-             style={styles.itemInput}
-             onChangeText={(text) => this.setState({lastname:text})}
-             value={this.state.lastname}
-           />
-           <Text style={styles.title}>Class</Text>
-           <TextInput
-             name='classn'
-             style={styles.itemInput}
-             onChangeText={(text) => this.setState({classn:text})}
-             value={this.state.classn}
-           />
-           <Text style={styles.title}>Grade</Text>
-           <TextInput
-             name='grade'
-             style={styles.itemInput}
-             onChangeText={(text) => this.setState({grade:text})}
-             value={this.state.grade}
-           />
-           <TouchableHighlight
-             style = {styles.button}
-             underlayColor= "white"
-             onPress = {this.handleSubmit}
-           >
-             <Text
-               style={styles.buttonText}>
-               Add
-             </Text>
-           </TouchableHighlight>
-         </View>
-         
-       </ScrollView>
-    );
-  }
-}
-
-
 
 export default createMaterialTopTabNavigator ({
   Home: HomeScreen,
